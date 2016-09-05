@@ -1,6 +1,7 @@
 package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.tagging.*;
 
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
+    private Tagging tagging;
 
     private final UniqueTagList tags;
     /**
@@ -25,6 +27,7 @@ public class Person implements ReadOnlyPerson {
         this.email = email;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tagging = new Tagging();
     }
 
     /**
@@ -63,6 +66,7 @@ public class Person implements ReadOnlyPerson {
      * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
+    	tagging.recordDelete(tags);
         tags.setTags(replacement);
     }
 
