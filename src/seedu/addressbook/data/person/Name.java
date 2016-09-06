@@ -61,7 +61,25 @@ public class Name {
         return fullName.hashCode();
     }
     
+    /**
+     * Returns true of the other name is very similar to this name.
+     * Two names are considered similar if more than half of the name is same
+     */
     public boolean isSimilar(Name other){
+    	String[] splicedName = this.toString().split("[ ||,]");
+    	String[] splicedOtherName = other.toString().split("[ ||,]");
+    	int similarity = 0;
+    	for(String e : splicedOtherName){
+    		for(String f : splicedName){
+    			if(e.equalsIgnoreCase(f)){
+    				similarity++;
+    				break;
+    			}
+    		}
+    	}
+    	if(similarity > splicedName.length/2){
+    		return true;
+    	}
 		return false;
     }
 }
