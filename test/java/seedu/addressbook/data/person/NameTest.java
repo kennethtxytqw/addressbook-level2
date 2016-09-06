@@ -1,5 +1,7 @@
 package seedu.addressbook.data.person;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,5 +27,7 @@ public class NameTest {
 	@Test
 	public void passSimilarNamesInto_isSimilar(){
 		boolean actual = JohnKSmith.isSimilar(SmithJohn);
+		boolean expected = true;
+		assertEquals(expected, actual);
 	}
 }
