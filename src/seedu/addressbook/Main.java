@@ -85,8 +85,8 @@ public class Main {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-            if(!ExitCommand.isExit(command)){
-            	ui.showToUser(addressBook.printableTagging());
+            if(ExitCommand.isExit(command)){
+            	ui.showToUser(addressBook.printableTaggings());
             }
 
         } while (!ExitCommand.isExit(command));

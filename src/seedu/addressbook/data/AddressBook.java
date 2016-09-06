@@ -7,6 +7,7 @@ import seedu.addressbook.data.tag.UniqueTagList.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tagging.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
-    private Tagging tagging;
+    private final ArrayList<Tagging> taggings;
     
     /**
      * Creates an empty address book.
@@ -31,7 +32,7 @@ public class AddressBook {
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
-        this.tagging = new Tagging();
+        this.taggings = new ArrayList<Tagging>();
     }
 
     /**
@@ -44,6 +45,7 @@ public class AddressBook {
     public AddressBook(UniquePersonList persons, UniqueTagList tags) {
         this.allPersons = new UniquePersonList(persons);
         this.allTags = new UniqueTagList(tags);
+        this.taggings = new ArrayList<Tagging>();
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
@@ -69,7 +71,9 @@ public class AddressBook {
         for (Tag tag : personTags) {
             commonTagReferences.add(masterTagObjects.get(tag));
         }
-        person.setTags(new UniqueTagList(commonTagReferences));
+        UniqueTagList tagList = new UniqueTagList(commonTagReferences);
+        taggings.addAll(Tagging.processTaggings(person, tagList));
+        person.setTags(tagList);
     }
 
     /**
@@ -82,6 +86,7 @@ public class AddressBook {
     public void addPerson(Person toAdd) throws DuplicatePersonException {
         syncTagsWithMasterList(toAdd);
         allPersons.add(toAdd);
+        taggings.addAll(Tagging.processInitialTagging(toAdd, toAdd.getTags()));
     }
 
     /**
@@ -147,7 +152,11 @@ public class AddressBook {
         return new UniqueTagList(allTags);
     }
     
-    public String[] printableTagging(){
-    	return tagging.toArray();
+    public String[] printableTaggings(){
+    	String [] result = new String[taggings.size()];
+    	for(int i = 0; i < taggings.size(); i++){
+    		result[i] = taggings.get(i).toString();
+    	}
+    	return result;
     }
 }
