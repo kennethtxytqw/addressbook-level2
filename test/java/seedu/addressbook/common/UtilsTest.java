@@ -30,28 +30,28 @@ public class UtilsTest {
 	}
 	
 	@Test
-	public void passNullInto_isAnyNull(){
+	public void isAnyNull_nullTestCase_trueReturned(){
 		Boolean actual = Utils.isAnyNull(nullTestCase);
 		Boolean expected = true;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void passNoNullInto_isAnyNull(){
+	public void isAnyNull_noNullTestCase_falseReturned(){
 		Boolean actual = Utils.isAnyNull(noNullTestCase);
 		Boolean expected = false;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void passUniquesInto_elementsAreUnique(){
+	public void elementsAreUnique_withoutDuplicateTestCase_trueReturned(){
 		Boolean actual = Utils.elementsAreUnique(withoutDuplicateTestCase);
 		Boolean expected = true;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void passDuplicatesInto_elementsAreUnique(){
+	public void elementsAreUnique_withDuplicateTestCase_falseReturned(){
 		Boolean actual = Utils.elementsAreUnique(withDuplicateTestCase);
 		Boolean expected = false;
 		assertEquals(expected, actual);
