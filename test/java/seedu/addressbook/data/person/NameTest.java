@@ -25,7 +25,7 @@ public class NameTest {
 	}
 	
 	@Test
-	public void passSimilarNamesInto_isSimilar(){
+	public void isSimilar_similarNames_trueReturned(){
 		boolean actual = JohnKSmith.isSimilar(SmithJohn);
 		boolean expected = true;
 		assertEquals(expected, actual);
